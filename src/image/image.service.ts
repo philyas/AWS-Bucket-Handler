@@ -39,7 +39,7 @@ export class ImageService {
   }
   
   async remove(id: string) {
-    const response = this.s3Client.send(new DeleteObjectCommand({ Bucket: process.env.BUCKET_NAME, Key:id }));
+    const response = await this.s3Client.send(new DeleteObjectCommand({ Bucket: process.env.BUCKET_NAME, Key:id }));
     console.log(response)
     
     return 'Object deleted';
