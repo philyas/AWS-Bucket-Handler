@@ -2,13 +2,15 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { S3Client, ListObjectsCommand } from '@aws-sdk/client-s3';
+import { Express } from 'express';
 
 @Injectable()
 export class ImageService {
   constructor(@Inject('S3_CLIENT') private readonly s3Client: S3Client) {
   }
 
-  create(createImageDto: CreateImageDto) {
+  create(file: Express.Multer.File) {
+    console.log(file)
     return 'This action adds a new image';
   }
 
