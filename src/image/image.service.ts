@@ -42,7 +42,7 @@ export class ImageService {
     const response = await this.s3Client.send(new DeleteObjectCommand({ Bucket: process.env.BUCKET_NAME, Key:id }));
     console.log(response)
     
-    return 'Object deleted';
+    return 'File deleted';
   }
 
 

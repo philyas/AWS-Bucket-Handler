@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes } from '@nestjs/common';
 import { ImageService } from './image.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { Express } from 'express';
 import { UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-
+import { ParseFilePipe, FileTypeValidator } from '@nestjs/common';
 
 @Controller('image')
 export class ImageController {
@@ -13,7 +13,11 @@ export class ImageController {
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  uploadFile(@UploadedFile(new ParseFilePipe({
+    validators: [
+        new FileTypeValidator({fileType: 'png'}),
+    ]
+})) file: Express.Multer.File) {
     return this.imageService.create(file)
   }
 
