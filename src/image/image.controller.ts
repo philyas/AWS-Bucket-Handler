@@ -7,7 +7,7 @@ import { UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ParseFilePipe, FileTypeValidator } from '@nestjs/common';
 
-@Controller('image')
+@Controller('documents')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
